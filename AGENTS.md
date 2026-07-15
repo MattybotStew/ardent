@@ -142,8 +142,7 @@ When changing type, update both the utilities and this table so they stay aligne
 - **Inter-section gap (single source of truth):** `main` in `page.tsx` uses `gap-30` (120px) / `max-lg:gap-20` (80px). Do **not** add outer vertical padding/margin on sections for spacing between sections.
 - Inner panel content (e.g. light rounded boxes) may still use `py-30` for padding *inside* the panel only.
 - Cards: `rounded-[20px]` universally (NO `rounded-[26px]`)
-- **Content max-width:** `.container-site` in `globals.css` — **80%** of viewport (100% + 24px side padding below 1024px). Use on major section inners (Hero, Stats, Platforms, Presence, News, Contact, Footer, Header bar).
-- **Team max-width:** Uses `.container-site` (80% viewport) like all other sections. Bio cards are text-over-image overlays, so a narrower container is no longer needed.
+- **Content max-width:** `.container-site` in `globals.css` — **xl+ 65%**, **lg 80%**, **md 90%**, below md **100% + 24px** padding. Use on major section inners (Hero, Stats, Platforms, Presence, Team, News, Contact, Footer, Header bar).
 - Gaps: `gap-7.5` / `gap-[30px]`, `gap-2.5`, `gap-10`
 
 ## Component Patterns
@@ -237,7 +236,7 @@ Do not mark these done without implementing them:
 - **Card review mediums:** sticky-header section offset (`scroll-padding-top` / `scroll-margin-top` in `globals.css`); department tabs horizontal scroll under `max-lg`
 - **Team title wrap:** intentional break after `&` via `teamTitleLines()` + NBSP-bound role phrases via `protectTitlePhrases()` (`src/data/team.ts`) — avoids “Partner & Chief / Executive Officer” orphans; View bio stays bottom-pinned with flex
 - **Team photo frame:** `aspect-[4/5]` (width-driven) text-over-image overlay with gradient fade; modal uses the same ratio
-- **Team container:** Migrated from `.container-team` to `.container-site` (80% viewport) — same width as all other sections
+- **Team container / site width:** `.container-site` is xl+ **65%** / lg 80% / md 90% / mobile 100%+pad (not a flat 80%)
 - **Stats dividers:** Start/end dividers hidden on mobile via `max-lg:hidden` to prevent double strokes; between dividers remain visible
 - **Divider component:** Added `className` prop so `max-lg:hidden` applies directly to the flex child (wrapper divs broke `self-stretch` on desktop)
 

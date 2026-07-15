@@ -64,17 +64,33 @@ body {
   line-height: 1.5;
 }
 
-/* Shared content container — 80% viewport on large screens */
+/*
+  Shared content container — responsive % of viewport:
+  xl+ 65% · lg 80% · md 90% · below md 100% + 24px padding
+*/
 .container-site {
   width: 100%;
-  max-width: 80%;
+  max-width: 100%;
   margin-inline: auto;
+  padding-inline: 1.5rem; /* 24px — mobile edge inset */
 }
 
-@media (max-width: 1023px) {
+@media (min-width: 768px) {
   .container-site {
-    max-width: 100%;
-    padding-inline: 1.5rem; /* 24px — mobile edge inset */
+    max-width: 90%;
+    padding-inline: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-site {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-site {
+    max-width: 65%;
   }
 }
 

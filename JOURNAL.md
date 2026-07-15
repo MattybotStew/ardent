@@ -1,5 +1,10 @@
 # Journal
 
+## 2026-07-15 — Cursor (desktop container width + Stats grid)
+- User screenshot (Stats + Platforms) still too wide on desktop — restored responsive `.container-site` scale: xl+ **65%**, lg 80%, md 90%, below md 100% + 24px
+- Stats bottom `20+` row: same 3-column flex skeleton as rows above so side dividers align under the middle column (fixes freestanding narrow box)
+- Docs: AGENTS.md / .cursorrules updated for container cascade
+
 ## 2026-07-15 — Cline (Team cards text-over-image + Stats divider fix)
 
 - **Team cards:** Replaced stacked photo+text layout with text-over-image overlay — names/titles/CTA layered on the photo with `bg-gradient-to-t from-ardent-blue/90 via-ardent-blue/40` gradient (matches Platform cards). Eliminates the separate ~140px text block, reducing card height by ~25% (mobile: ~549px → ~409px; desktop: ~530px → ~383px).

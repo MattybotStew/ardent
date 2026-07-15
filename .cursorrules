@@ -68,8 +68,7 @@ Rules: rem/clamp only; body ≥16px; line-height ~1.5 body / ~1.2 headings; no G
 
 - Sections: `px-8.5` (34px) or `px-25` (100px); major vertical `py-30` (120px); mobile often `max-lg:px-6 max-lg:py-20`
 - Cards: `rounded-[20px]` only (NO `rounded-[26px]`)
-- **`.container-site`:** 80% viewport (100% + 24px pad below lg) — most sections
-- **Team max-width:** Uses `.container-site` (80% viewport) like all other sections. Bio cards are text-over-image overlays, so a narrower container is no longer needed.
+- **`.container-site`:** xl+ 65% / lg 80% / md 90% / mobile 100% + 24px pad — all major sections including Team
 - Gaps: `gap-7.5` (30px), `gap-2.5`, `gap-10`
 - Prefer Tailwind v4 mapped utilities; arbitrary values when needed
 
@@ -145,5 +144,6 @@ Rules: rem/clamp only; body ≥16px; line-height ~1.5 body / ~1.2 headings; no G
 - [x] Card review mediums — sticky-header scroll offsets; tablet tab scroll row
 - [x] Team title wrap — intentional break after `&` + NBSP role phrases (`teamTitleLines` / `protectTitlePhrases`); no mid-title ellipsis
 - [x] Team photo frame — `aspect-[4/5]` text-over-image overlay with gradient fade; modal uses the same ratio
-- [x] Team container — Migrated from `.container-team` to `.container-site` (80% viewport) — same width as all other sections
+- [x] Site container — `.container-site` xl 65% / lg 80% / md 90% / mobile 100% + pad (desktop no longer a flat 80%)
+- [x] Stats bottom row — 3-col skeleton so `20+` aligns under middle column dividers on desktop
 - [x] Stats dividers — Start/end dividers hidden on mobile via `max-lg:hidden` to prevent double strokes; between dividers remain visible; Divider `className` prop added

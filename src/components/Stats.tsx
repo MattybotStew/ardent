@@ -88,7 +88,7 @@ const stats: Stat[] = [
 
 function StatCell({ value, label, largeValue = false }: Omit<Stat, "id">) {
   return (
-    <div className="flex flex-col items-center justify-center px-[30px] py-10 text-center text-ardent-blue">
+    <div className="flex flex-col items-center justify-center px-7.5 py-10 text-center text-ardent-blue">
       <p
         className={`mb-0 font-normal tracking-[-1px] ${
           largeValue ? "text-stat-lg" : "text-stat"
@@ -112,9 +112,7 @@ function Divider({ className = "" }: { className?: string }) {
 }
 
 function StatRow({ rowStats }: { rowStats: Stat[] }) {
-  const items: React.ReactNode[] = [
-    <Divider key="start" className="max-lg:hidden" />,
-  ];
+  const items: React.ReactNode[] = [];
 
   rowStats.forEach((stat, index) => {
     if (index > 0) {
@@ -127,7 +125,8 @@ function StatRow({ rowStats }: { rowStats: Stat[] }) {
     );
   });
 
-  items.push(<Divider key="end" />);
+  // Mobile-only rule between stacked rows — no outer strokes on desktop
+  items.push(<Divider key="end" className="lg:hidden" />);
 
   return <div className="flex w-full items-stretch gap-2.5 max-lg:flex-col">{items}</div>;
 }
@@ -136,19 +135,26 @@ export default function Stats() {
   return (
     <section id="at-a-glance" className="w-full">
       <div className="container-site flex flex-col items-center gap-20">
-        <h2 className="text-heading-1 max-w-[830px] text-center font-bold text-ardent-blue">
+        <h2 className="text-heading-1 max-w-207.5 text-center font-bold text-ardent-blue">
           Ardent at a Glance
         </h2>
 
         <div className="flex w-full flex-col gap-2.5">
           <StatRow rowStats={stats.slice(0, 3)} />
           <StatRow rowStats={stats.slice(3, 6)} />
-          <div className="flex items-stretch justify-center gap-2.5 max-lg:w-full max-lg:flex-col">
+          {/*
+            Same 3-column skeleton as rows above so internal dividers align under
+            the middle column. No far-left/far-right strokes on desktop.
+          */}
+          <div className="flex w-full items-stretch gap-2.5 max-lg:flex-col">
+            <div className="min-w-0 flex-1 max-lg:hidden" aria-hidden="true" />
             <Divider className="max-lg:hidden" />
-            <div className="w-[378px] max-lg:w-full">
+            <div className="min-w-0 flex-1">
               <StatCell {...stats[6]} />
             </div>
             <Divider className="max-lg:hidden" />
+            <div className="min-w-0 flex-1 max-lg:hidden" aria-hidden="true" />
+            <Divider className="lg:hidden" />
           </div>
         </div>
       </div>
