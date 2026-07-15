@@ -53,7 +53,7 @@ export default function Contact() {
           ))}
         </div>
 
-        <div className="flex w-full max-w-[400px] shrink-0 items-center justify-center rounded-[20px] bg-black/15 p-10 max-lg:max-w-none max-lg:p-8">
+        <div className="flex min-w-0 flex-1 items-center justify-center rounded-[20px] bg-black/15 p-10 max-lg:p-8">
           <div className="space-y-6 text-center">
             <h3 className="text-heading-1 font-bold leading-[1.1] tracking-[-1px] text-white">
               Headquarters
