@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section className="w-full">
-      <div className="container-site relative flex min-h-192 items-center overflow-hidden rounded-[20px] py-30 max-lg:min-h-[100dvh] max-lg:rounded-none max-lg:py-20">
+      <div className="container-site relative flex min-h-192 items-end overflow-hidden rounded-[20px] max-lg:min-h-[100dvh] max-lg:rounded-none">
         <Image
           src="/images/hero-bg.png"
           alt="City skyline"
@@ -20,14 +20,14 @@ export default function Hero() {
           }}
         />
 
-        <div className="relative z-10 w-full px-16 max-lg:px-6">
-          <div className="max-w-[560px] space-y-10 text-left max-lg:max-w-none">
-            <h1 className="text-hero font-bold tracking-[-0.04em] text-white">
+        <div className="relative z-10 w-full px-16 pb-16 max-lg:px-6 max-lg:pb-6">
+          <div className="space-y-10 text-left">
+            <h1 className="text-hero max-w-[52rem] font-bold tracking-[-0.04em] text-white">
               Pursuing Opportunity.
               <br />
               Investing in Value.
             </h1>
-            <p className="text-body-lg text-white/80">
+            <p className="text-body-lg max-w-[36rem] text-white/80">
               A cycle-tested real estate investment firm with a disciplined
               emphasis on structure, deploying capital across debt and equity
               investments through multiple market cycles.
