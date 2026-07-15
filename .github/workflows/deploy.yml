@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [cursor/homepage-polish-team-news]
+    branches: [master]
 
 permissions:
   contents: write
