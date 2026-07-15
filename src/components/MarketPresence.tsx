@@ -20,14 +20,14 @@ export default function MarketPresence() {
         <div className="w-full overflow-hidden rounded-[20px] max-lg:hidden">
           <div className="relative mx-auto h-[656px] w-full max-w-[1052px] overflow-hidden rounded-[14px] bg-white">
             <SvgImg
-              src="/images/map-us.svg"
+              src="/ardent/images/map-us.svg"
               alt="United States map showing Ardent presence"
               width={818}
               height={517}
               className="absolute left-[43px] top-[69px] h-[517px] w-[818px]"
             />
             <SvgImg
-              src="/images/map-uk.svg"
+              src="/ardent/images/map-uk.svg"
               alt="United Kingdom map showing Ardent presence"
               width={156}
               height={245}
@@ -47,7 +47,7 @@ export default function MarketPresence() {
               United States
             </figcaption>
             <SvgImg
-              src="/images/map-us.svg"
+              src="/ardent/images/map-us.svg"
               alt="United States map showing Ardent presence"
               width={818}
               height={517}
@@ -59,7 +59,7 @@ export default function MarketPresence() {
               United Kingdom
             </figcaption>
             <SvgImg
-              src="/images/map-uk.svg"
+              src="/ardent/images/map-uk.svg"
               alt="United Kingdom map showing Ardent presence"
               width={156}
               height={245}

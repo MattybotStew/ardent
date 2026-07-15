@@ -2,14 +2,14 @@ import Image from "next/image";
 
 const platforms = [
   {
-    image: "/images/debt-platform.jpg",
+    image: "/ardent/images/debt-platform.jpg",
     title: "Debt Platform",
     subtitle: "Real Estate-Backed Lending",
     description:
       "Focused on transitional assets and value-add business plans for the development, redevelopment, and construction of commercial real estate, including specialized lending solutions for complex, time-sensitive, and opportunistic situations.",
   },
   {
-    image: "/images/equity-platform.jpg",
+    image: "/ardent/images/equity-platform.jpg",
     title: "Equity Platform",
     subtitle: "Real Estate Development & Opportunistic Investments",
     description:

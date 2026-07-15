@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="flex flex-wrap items-center justify-between gap-8 max-lg:flex-col max-lg:items-start">
           <Link href="/" className="shrink-0 opacity-95 transition-opacity hover:opacity-100">
             <SvgImg
-              src="/images/logo.svg"
+              src="/ardent/images/logo.svg"
               alt="The Ardent Companies"
               width={200}
               height={31}

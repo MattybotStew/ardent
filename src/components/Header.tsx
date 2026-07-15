@@ -35,7 +35,7 @@ export default function Header() {
       <div className="container-site flex min-w-0 items-center justify-between gap-4">
         <Link href="/" className="shrink-0" onClick={closeMobileMenu}>
           <SvgImg
-            src="/images/logo.svg"
+            src="/ardent/images/logo.svg"
             alt="Ardent"
             width={180}
             height={28}

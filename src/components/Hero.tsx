@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="w-full">
       <div className="container-site relative flex min-h-192 items-end overflow-hidden rounded-[20px] max-lg:min-h-[100dvh] max-lg:rounded-none">
         <Image
-          src="/images/hero-bg.png"
+          src="/ardent/images/hero-bg.png"
           alt="City skyline"
           fill
           priority

@@ -29,7 +29,7 @@ export const fallbackNewsPosts: NewsPost[] = [
     excerpt:
       "Follow Ardent for firm updates, platform activity, and market perspectives across debt and equity real estate investments.",
     href: LINKEDIN_COMPANY_URL,
-    image: "/images/news-1.jpg",
+    image: "/ardent/images/news-1.jpg",
     source: "fallback",
   },
   {
@@ -38,7 +38,7 @@ export const fallbackNewsPosts: NewsPost[] = [
     excerpt:
       "Connect with The Ardent Companies on LinkedIn for news, announcements, and insights from our investment platforms.",
     href: LINKEDIN_COMPANY_URL,
-    image: "/images/news-2.jpg",
+    image: "/ardent/images/news-2.jpg",
     source: "fallback",
   },
   {
@@ -47,7 +47,7 @@ export const fallbackNewsPosts: NewsPost[] = [
     excerpt:
       "See recent posts from Ardent’s leadership and teams covering capital markets, development, and portfolio activity.",
     href: LINKEDIN_COMPANY_URL,
-    image: "/images/news-3.jpg",
+    image: "/ardent/images/news-3.jpg",
     source: "fallback",
   },
 ];
