@@ -65,32 +65,49 @@ body {
 }
 
 /*
-  Shared content container — responsive % of viewport:
-  xl+ 65% · lg 80% · md 90% · below md 100% + 24px padding
+  Shared content container (most sections):
+  lg+ 80% · md 90% · below md 100% + 24px padding
+  Use `width` (not only max-width) so % sizing is predictable.
 */
 .container-site {
   width: 100%;
-  max-width: 100%;
   margin-inline: auto;
   padding-inline: 1.5rem; /* 24px — mobile edge inset */
 }
 
 @media (min-width: 768px) {
   .container-site {
-    max-width: 90%;
+    width: 90%;
     padding-inline: 0;
   }
 }
 
 @media (min-width: 1024px) {
   .container-site {
-    max-width: 80%;
+    width: 80%;
   }
 }
 
-@media (min-width: 1280px) {
-  .container-site {
-    max-width: 65%;
+/*
+  Team container — same width as .container-site:
+  lg+ 80% · md 90% · below md 100% + 24px padding
+*/
+.container-team {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-team {
+    width: 90%;
+    padding-inline: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-team {
+    width: 80%;
   }
 }
 
