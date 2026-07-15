@@ -1,5 +1,37 @@
 # Journal
 
+## 2026-07-15 — Cline (Team cards text-over-image + Stats divider fix)
+
+- **Team cards:** Replaced stacked photo+text layout with text-over-image overlay — names/titles/CTA layered on the photo with `bg-gradient-to-t from-ardent-blue/90 via-ardent-blue/40` gradient (matches Platform cards). Eliminates the separate ~140px text block, reducing card height by ~25% (mobile: ~549px → ~409px; desktop: ~530px → ~383px).
+- **Team photo ratio:** Finalized at `aspect-[4/5]` (standard corporate portrait crop) — card and modal both match.
+- **Team container:** Migrated from `.container-team` (65%-90% breakpoint cascade) to `.container-site` (80% viewport) — consistent with all other sections. Removed `.container-team` CSS from `globals.css` (27 lines deleted).
+- **TeamCardTitle:** Added optional `className` prop for white text in overlay context; defaults to `text-charcoal`.
+- **Stats dividers:** Fixed double-stroke bug on mobile — wrapping `<Divider/>` in `<div className="max-lg:hidden">` broke `self-stretch` on desktop (vertical lines collapsed). Solution: added `className` prop directly to `Divider` component. Start dividers get `max-lg:hidden`; end dividers remain visible to give one clean separator between rows on mobile.
+- **Stats component:** `Divider` now accepts `className?: string` prop.
+- **Docs:** AGENTS.md, .cursorrules synced for team overlay, container migration, and stats divider fix.
+
+## 2026-07-15 — Cursor (Team bio card container + portraits)
+- Added `.container-team` in `globals.css`: xl+ 65%, lg 80%, md 90%, below md 100% + 24px padding
+- `Team.tsx` uses `.container-team` instead of flat `max-w-[65%]`
+- Portrait frames → `aspect-[3/4]` (cards + bio modal) for long vertical headshots; `sizes` tuned to container breakpoints
+- Docs: AGENTS.md / .cursorrules updated for `.container-team` vs `.container-site`
+
+## 2026-07-15 — Cursor (real Team title wrap fix)
+- Replaced `line-clamp` band-aid with intentional title structure in `teamTitleLines()` / `protectTitlePhrases()` (`src/data/team.ts`)
+- Compound titles break after `&` (“Partner &” / “Chief Executive Officer”) so roles aren’t orphaned mid-phrase
+- NBSP binds known multi-word roles (CEO/CFO, Managing Director, Real Estate, etc.)
+- Cards: flex footer with `mt-auto` “View bio” + stable text-block min-height; titles use `text-body` / `text-pretty`
+- Modal title uses same phrase protection
+- Team photo height: dropped fixed `h-[360px]` / `max-lg:h-[370px]` for `aspect-[4/5]` so frame scales with card width
+
+## 2026-07-15 — Cursor (agent docs sync after card review)
+- Branch: `cursor/homepage-polish-team-news` (`a7737ac`)
+- Synced **AGENTS.md** (canonical) + **.cursorrules** (+ `.clinerules` symlink) with card visual review status
+- Marked done: sticky-header scroll offsets, Team `line-clamp-3`, tab horizontal scroll, `sizes` on fill images
+- Open leftovers documented: card body `0.9375rem` (under 16px), map inner `rounded-[14px]`, optional Equity copy / News crop, Playwright cleanup
+- Corrected stale notes: per-member team photos (not shared `team-photo.jpg`); mobile nav is shipped; removed inaccurate “News excerpts = text-body” fixed claim
+- README / CLAUDE.md unchanged (already accurate pointers)
+
 ## 2026-07-15 — Cline (LinkedIn → News final sync + visual tweaks)
 - Verified `npm run build` clean with async `News.tsx` calling `getNewsPosts()` from `src/lib/linkedin.ts`
 - LinkedIn Posts API integration + curated fallbacks confirmed working; no compilation errors

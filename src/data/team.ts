@@ -28,6 +28,52 @@ export type TeamMember = {
 /** Default crop for Ardent headshots in fixed card frames */
 export const DEFAULT_TEAM_IMAGE_POSITION = "center 20%";
 
+/**
+ * Multi-word role phrases — bind with NBSP so the browser won't orphan
+ * "Chief" onto the line above "Executive Officer".
+ */
+const TITLE_KEEP_TOGETHER = [
+  "Chief Executive Officer",
+  "Chief Financial Officer",
+  "Vice Chairman",
+  "Self-Storage",
+  "Real Estate",
+  "Investor Relations",
+  "Managing Director",
+  "Executive Director",
+  "Senior Associate",
+  "Staff Accountant",
+  "Executive Assistant",
+] as const;
+
+/** Bind known role phrases with non-breaking spaces. */
+export function protectTitlePhrases(title: string): string {
+  let out = title;
+  for (const phrase of TITLE_KEEP_TOGETHER) {
+    if (out.includes(phrase)) {
+      out = out.replaceAll(phrase, phrase.replaceAll(" ", "\u00A0"));
+    }
+  }
+  return out;
+}
+
+/**
+ * Split compound titles at " & " so cards break as:
+ *   Partner &
+ *   Chief Executive Officer
+ * instead of the mid-phrase wrap "Partner & Chief / Executive Officer".
+ * Titles without " & " stay a single line.
+ */
+export function teamTitleLines(title: string): [string] | [string, string] {
+  const sep = " & ";
+  const idx = title.indexOf(sep);
+  if (idx === -1) return [protectTitlePhrases(title)];
+  return [
+    protectTitlePhrases(`${title.slice(0, idx)} &`),
+    protectTitlePhrases(title.slice(idx + sep.length)),
+  ];
+}
+
 export const teamTabs: TeamDepartment[] = [
   "Team",
   "Debt",

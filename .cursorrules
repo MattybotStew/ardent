@@ -68,7 +68,8 @@ Rules: rem/clamp only; body ≥16px; line-height ~1.5 body / ~1.2 headings; no G
 
 - Sections: `px-8.5` (34px) or `px-25` (100px); major vertical `py-30` (120px); mobile often `max-lg:px-6 max-lg:py-20`
 - Cards: `rounded-[20px]` only (NO `rounded-[26px]`)
-- Max content: `max-w-300` (1200px) mx-auto
+- **`.container-site`:** 80% viewport (100% + 24px pad below lg) — most sections
+- **Team max-width:** Uses `.container-site` (80% viewport) like all other sections. Bio cards are text-over-image overlays, so a narrower container is no longer needed.
 - Gaps: `gap-7.5` (30px), `gap-2.5`, `gap-10`
 - Prefer Tailwind v4 mapped utilities; arbitrary values when needed
 
@@ -108,12 +109,18 @@ Rules: rem/clamp only; body ≥16px; line-height ~1.5 body / ~1.2 headings; no G
 - [ ] **#9–#12** Layout diversity — Stats, MarketPresence, Team, News, Contact share centered stacks.
 - [ ] **Footer** — Mobile padding, real links (Terms/Privacy/LinkedIn), copyright year.
 - [ ] **Placeholder links** — Investor Login / News “more” still `href="#"`.
-- [ ] **`sizes` on fill images** — Hero, Platforms, News, Team.
+- [ ] Asset Management photos/bios still missing from client set.
+- [ ] Expand short/placeholder bios when client provides copy.
 
-### Low
+### Low (card visual review leftovers + polish)
 
+- [ ] **Card body ≥16px** — Platforms / News / Team still `text-[0.9375rem]`; switch body copy to `text-body` / `1rem`.
+- [ ] **Map inner radius** — MarketPresence `rounded-[14px]` → `rounded-[20px]` if design allows.
+- [ ] Platforms Equity blurb vs Debt length (optional copy tighten).
+- [ ] News third-card media crop / `object-position` (optional).
 - [ ] **#16** `Header.tsx` — Audit `font-medium` weight on Verdana nav.
 - [ ] Align type utilities with design-intent scale table when design approves.
+- [ ] Optional: remove Playwright `devDependency` + `.tmp-card-review/` audit artifacts.
 
 ### Done (keep for history)
 
@@ -127,11 +134,16 @@ Rules: rem/clamp only; body ≥16px; line-height ~1.5 body / ~1.2 headings; no G
 - [x] Mobile nav — `details`/`summary` Menu + Contact Us CTA below `lg`
 - [x] Maps mobile — stacked fluid maps under `max-lg`; desktop artboard unchanged
 - [x] Stats dividers — horizontal on `max-lg`
-- [x] Team tabs — static `<li>` labels (no dead buttons)
-- [x] News body — `text-body` for excerpts
+- [x] Team department tabs — working filters + horizontal scroll under `max-lg`
 - [x] Hero overlay radius — `max-lg:rounded-none`
 - [x] Heading hierarchy — Platforms / Contact `h2.sr-only`
 - [x] Team headshots — 38 individual photos imported; per-member card images working
 - [x] Team bios + department tabs + modal — client component with Escape/overlay/focus-trap/scroll-lock
 - [x] LinkedIn News — Posts API integration (`src/lib/linkedin.ts`, `src/data/news.ts`) with curated fallbacks
 - [x] SvgImg helper for scoped eslint-disable on public SVGs
+- [x] `sizes` on fill images — Hero, Platforms, News, Team
+- [x] Card review mediums — sticky-header scroll offsets; tablet tab scroll row
+- [x] Team title wrap — intentional break after `&` + NBSP role phrases (`teamTitleLines` / `protectTitlePhrases`); no mid-title ellipsis
+- [x] Team photo frame — `aspect-[4/5]` text-over-image overlay with gradient fade; modal uses the same ratio
+- [x] Team container — Migrated from `.container-team` to `.container-site` (80% viewport) — same width as all other sections
+- [x] Stats dividers — Start/end dividers hidden on mobile via `max-lg:hidden` to prevent double strokes; between dividers remain visible; Divider `className` prop added

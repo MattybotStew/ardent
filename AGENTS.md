@@ -142,7 +142,8 @@ When changing type, update both the utilities and this table so they stay aligne
 - **Inter-section gap (single source of truth):** `main` in `page.tsx` uses `gap-30` (120px) / `max-lg:gap-20` (80px). Do **not** add outer vertical padding/margin on sections for spacing between sections.
 - Inner panel content (e.g. light rounded boxes) may still use `py-30` for padding *inside* the panel only.
 - Cards: `rounded-[20px]` universally (NO `rounded-[26px]`)
-- **Content max-width:** `.container-site` in `globals.css` — **80%** of viewport (100% + 24px side padding below 1024px). Use on all major section inners (Hero, Stats, Platforms, Presence, Team, News, Contact, Footer, Header bar).
+- **Content max-width:** `.container-site` in `globals.css` — **80%** of viewport (100% + 24px side padding below 1024px). Use on major section inners (Hero, Stats, Platforms, Presence, News, Contact, Footer, Header bar).
+- **Team max-width:** Uses `.container-site` (80% viewport) like all other sections. Bio cards are text-over-image overlays, so a narrower container is no longer needed.
 - Gaps: `gap-7.5` / `gap-[30px]`, `gap-2.5`, `gap-10`
 
 ## Component Patterns
@@ -159,14 +160,14 @@ Key assets currently in repo:
 
 - `logo.svg`, `hero-bg.png`, `map-us.svg`, `map-uk.svg`
 - `debt-platform.jpg`, `equity-platform.jpg`
-- `team-photo.jpg` (placeholder shared by all team cards — needs per-member images)
+- `public/images/team/*.jpg` — per-member headshots (Asset Management set still incomplete)
 - `news-1.jpg` … `news-3.jpg`, map markers
 
 ### Single-Page Navigation
 
 - Anchors: `#at-a-glance`, `#platforms`, `#presence`, `#team`, `#news`, `#contact`
 - Each section sets matching `id`
-- Header nav is `max-lg:hidden` today — mobile nav alternative is open work (see Known open work)
+- Desktop nav in header; below `lg`, mobile Menu via `details`/`summary` + always-visible Contact Us
 
 ### Component Conventions
 
@@ -201,14 +202,27 @@ Key assets currently in repo:
 
 Do not mark these done without implementing them:
 
-- Footer mobile padding, real Terms/Privacy/LinkedIn links, copyright year
-- Layout diversity across sections (many centered stacks)
-- Keep type utilities vs design-intent table aligned over time
-- Placeholder links (`Investor Login`, News “more”) still `href="#"`
-- Prefer `sizes` on `fill` images (Hero, Platforms, News)
+### Medium
+
+- Footer — real Terms/Privacy/LinkedIn links, copyright year, mobile padding audit
+- Layout diversity — Stats, MarketPresence, Team, News, Contact still share similar centered stacks
+- Placeholder links — Investor Login / News “more” still `href="#"` (need client URLs)
 - Asset Management team photos/bios still missing from client set
 - Placeholder/short bios for some non-leadership staff (expand when client provides)
-- Team is a client component (`Team.tsx`) for tabs + bio modal — exception to “no client” rule
+
+### Low (incl. card visual review leftovers @ 390 / 768 / 1440)
+
+- Card body type — Platforms / News / Team still use `text-[0.9375rem]` (~15px); AGENTS body rule is ≥16px (`text-body` / `1rem`)
+- MarketPresence inner map board — `rounded-[14px]` vs card rule `rounded-[20px]` (align if design allows)
+- Platforms Equity blurb much longer than Debt — uneven optical weight (optional copy tighten)
+- News third-card media — graphic poster vs photo cards (optional `object-position` / crop)
+- Header — audit `font-medium` weight on Verdana nav
+- Align type utilities with design-intent scale table when design approves
+- Optional: remove temporary Playwright `devDependency` used for the card audit (`.tmp-card-review/`)
+
+### Notes (not “open bugs”)
+
+- Team is a client component (`Team.tsx`) for tabs + bio modal — allowed exception to “no client” rule
 
 ### Fixed (2026-07-15)
 
@@ -216,10 +230,16 @@ Do not mark these done without implementing them:
 - MarketPresence: desktop absolute composition retained; mobile/tablet stacked fluid maps
 - Stats dividers: `max-lg:h-px max-lg:w-full` for column layout
 - Team: headshots + bios + working department tabs + full-bio modal (`src/data/team.ts`, `Team.tsx`)
-- News excerpts: `text-body` (≥16px) instead of `text-caption`
 - Hero gradient: `max-lg:rounded-none` matches image container
 - Platforms / Contact: section `h2.sr-only` for heading hierarchy
 - News & Announcements: LinkedIn Posts API integration (`src/lib/linkedin.ts`, `src/data/news.ts`) with curated fallbacks when credentials not set
+- `sizes` on `fill` images — Hero, Platforms, News, Team
+- **Card review mediums:** sticky-header section offset (`scroll-padding-top` / `scroll-margin-top` in `globals.css`); department tabs horizontal scroll under `max-lg`
+- **Team title wrap:** intentional break after `&` via `teamTitleLines()` + NBSP-bound role phrases via `protectTitlePhrases()` (`src/data/team.ts`) — avoids “Partner & Chief / Executive Officer” orphans; View bio stays bottom-pinned with flex
+- **Team photo frame:** `aspect-[4/5]` (width-driven) text-over-image overlay with gradient fade; modal uses the same ratio
+- **Team container:** Migrated from `.container-team` to `.container-site` (80% viewport) — same width as all other sections
+- **Stats dividers:** Start/end dividers hidden on mobile via `max-lg:hidden` to prevent double strokes; between dividers remain visible
+- **Divider component:** Added `className` prop so `max-lg:hidden` applies directly to the flex child (wrapper divs broke `self-stretch` on desktop)
 
 ## Session continuity
 

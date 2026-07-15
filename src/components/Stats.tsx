@@ -103,14 +103,18 @@ function StatCell({ value, label, largeValue = false }: Omit<Stat, "id">) {
   );
 }
 
-function Divider() {
+function Divider({ className = "" }: { className?: string }) {
   return (
-    <div className="w-px shrink-0 self-stretch bg-[rgba(51,51,51,0.2)] max-lg:h-px max-lg:w-full max-lg:self-auto" />
+    <div
+      className={`w-px shrink-0 self-stretch bg-[rgba(51,51,51,0.2)] max-lg:h-px max-lg:w-full max-lg:self-auto ${className}`}
+    />
   );
 }
 
 function StatRow({ rowStats }: { rowStats: Stat[] }) {
-  const items: React.ReactNode[] = [<Divider key="start" />];
+  const items: React.ReactNode[] = [
+    <Divider key="start" className="max-lg:hidden" />,
+  ];
 
   rowStats.forEach((stat, index) => {
     if (index > 0) {
@@ -140,11 +144,11 @@ export default function Stats() {
           <StatRow rowStats={stats.slice(0, 3)} />
           <StatRow rowStats={stats.slice(3, 6)} />
           <div className="flex items-stretch justify-center gap-2.5 max-lg:w-full max-lg:flex-col">
-            <Divider />
+            <Divider className="max-lg:hidden" />
             <div className="w-[378px] max-lg:w-full">
               <StatCell {...stats[6]} />
             </div>
-            <Divider />
+            <Divider className="max-lg:hidden" />
           </div>
         </div>
       </div>
