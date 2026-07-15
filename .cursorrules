@@ -1,0 +1,137 @@
+# The Ardent Companies — Marketing Website
+
+> **Source of truth:** `AGENTS.md` (edit that first, then keep this file aligned).
+> **Cline:** `.clinerules` is a symlink to this file.
+> **Claude:** `CLAUDE.md` → `@AGENTS.md`.
+> **Session log:** `JOURNAL.md`.
+
+## Project Overview
+
+A single-page, static Next.js marketing website for The Ardent Companies, a privately held real estate investment firm.
+
+## Tech Stack
+
+- Framework: Next.js 16.2.10 (with breaking changes — always check `node_modules/next/dist/docs/` before writing Next.js code)
+- UI Library: React 19.2.4
+- Styling: Tailwind CSS v4 (CSS-first config via `@import "tailwindcss"` and `@theme inline` in globals.css — do NOT create tailwind.config.ts)
+- Language: TypeScript 5
+- Fonts: System font Verdana (stack: Verdana, Geneva, sans-serif) — no Google Fonts imports
+- Linting: ESLint 9 + eslint-config-next
+
+## File Structure
+
+- `src/app/layout.tsx` — Root layout with metadata and HTML structure
+- `src/app/page.tsx` — Home page composing all sections in order
+- `src/app/globals.css` — Tailwind import, CSS custom properties, @theme, type @utility classes
+- `src/components/` — Header, Hero, Stats, Platforms, MarketPresence, Team, News, Contact, Footer, SvgImg
+- `src/data/` — news.ts (LinkedIn fallbacks), team.ts (members, departments, bios)
+- `src/lib/` — linkedin.ts (LinkedIn Posts API fetch + getNewsPosts() helper)
+- `public/images/` — Static assets (`logo.svg`, `hero-bg.png`, `map-us.svg`, `map-uk.svg`, platform/news/team photos)
+- `public/images/team/` — 38 individual headshots for team member cards
+
+## Design System
+
+### Colors (from globals.css)
+
+- ardent-blue: #00315b
+- ardent-blue-dark: #002a4d
+- ardent-light: #f6f9fc
+- charcoal: #4a4a4a
+- background: #ffffff
+- foreground: #00315b
+
+Prefer tokens over one-off hex. Register new intentional colors in `:root` + `@theme inline`.
+
+### Typography
+
+**Font**: `Verdana, Geneva, sans-serif` only.
+
+**Design intent**: Major Third (1.25). See full table in `AGENTS.md`.
+
+**Implemented utilities** (use these in components):
+
+| Class | Size |
+| ----- | ---- |
+| `text-hero` | `clamp(1.75rem, 5vw, 4.125rem)` |
+| `text-heading-1` | `clamp(1.75rem, 3vw, 3rem)` |
+| `text-heading-2` | `clamp(1.5rem, 2.5vw, 2.25rem)` |
+| `text-heading-3` | `clamp(1.25rem, 1.75vw, 1.375rem)` |
+| `text-body` | `1.125rem` (18px) |
+| `text-body-lg` | `clamp(1.125rem, 1.5vw, 1.25rem)` |
+| `text-small` | ~15.75px |
+| `text-caption` | 14px — metadata only, not body copy |
+| `text-stat` / `text-stat-lg` / `text-stat-accent` | clamp ranges for Stats |
+
+Rules: rem/clamp only; body ≥16px; line-height ~1.5 body / ~1.2 headings; no Google Fonts.
+
+### Layout Conventions
+
+- Sections: `px-8.5` (34px) or `px-25` (100px); major vertical `py-30` (120px); mobile often `max-lg:px-6 max-lg:py-20`
+- Cards: `rounded-[20px]` only (NO `rounded-[26px]`)
+- Max content: `max-w-300` (1200px) mx-auto
+- Gaps: `gap-7.5` (30px), `gap-2.5`, `gap-10`
+- Prefer Tailwind v4 mapped utilities; arbitrary values when needed
+
+## Critical Rules
+
+1. **THIS IS NOT STANDARD NEXT.JS** — Next.js 16.2.10 has breaking changes. Read `node_modules/next/dist/docs/` before writing framework APIs.
+2. **No client components** — Fully static, server-rendered. NO `"use client"`, NO useState/useEffect, NO event handlers beyond anchor links unless explicitly requested.
+3. **Images** — `next/image` for JPG/PNG. Bare `<img>` OK for SVGs (`logo.svg`, `map-us.svg`, `map-uk.svg`). Prefer `sizes` on `fill` images.
+4. **Single-page navigation** — Anchors: `#at-a-glance`, `#platforms`, `#presence`, `#team`, `#news`, `#contact`. Each section sets its `id`.
+5. **Tailwind v4 CSS-first** — Colors/fonts via `@theme inline` in globals.css. Do NOT create tailwind.config.ts.
+6. **All text is Verdana** — Single font via `font-sans`. No Archivo/PT Sans/Noto.
+7. **Responsive design required** — Use `max-lg:` so multi-column layouts collapse below 1024px; reduce padding on small screens.
+8. **New components** go in `src/components/`, PascalCase, default-exported, composed in `src/app/page.tsx`.
+9. **Props** use inline type annotations.
+10. **Gradient overlays** on images use absolute positioning; prefer tokenized brand blues.
+
+## Component Reference
+
+- **Header** — Sticky nav, logo (SVG img), 5 nav links, Investor Login, Contact Us CTA
+- **Hero** — Background image, gradient overlay, H1 + description
+- **Stats** — At a Glance large number stats
+- **Platforms** — Debt + Equity cards with image backgrounds
+- **MarketPresence** — US + UK maps
+- **Team** — Leadership grid + working department tabs + bio modal (client component)
+- **News** — Async LinkedIn Posts API integration with curated fallbacks
+- **Contact** — Investing / Partnering / Working + Headquarters
+- **Footer** — Copyright bar
+
+## Open work checklist
+
+### High
+
+(none — all high-priority items resolved)
+
+### Medium
+
+- [ ] **#9–#12** Layout diversity — Stats, MarketPresence, Team, News, Contact share centered stacks.
+- [ ] **Footer** — Mobile padding, real links (Terms/Privacy/LinkedIn), copyright year.
+- [ ] **Placeholder links** — Investor Login / News “more” still `href="#"`.
+- [ ] **`sizes` on fill images** — Hero, Platforms, News, Team.
+
+### Low
+
+- [ ] **#16** `Header.tsx` — Audit `font-medium` weight on Verdana nav.
+- [ ] Align type utilities with design-intent scale table when design approves.
+
+### Done (keep for history)
+
+- [x] Platforms JPG backgrounds use `next/image`
+- [x] News radii → `rounded-[20px]`; removed faux follower counts
+- [x] Stats label casing consistency
+- [x] Contact HQ card `rounded-[20px]`
+- [x] Responsive pass R1–R14 foundations (`max-lg:`, fluid type utilities, stacking)
+- [x] Font docs: Verdana only (no Archivo)
+- [x] Agent docs sync (AGENTS.md / .cursorrules / .clinerules / README / JOURNAL)
+- [x] Mobile nav — `details`/`summary` Menu + Contact Us CTA below `lg`
+- [x] Maps mobile — stacked fluid maps under `max-lg`; desktop artboard unchanged
+- [x] Stats dividers — horizontal on `max-lg`
+- [x] Team tabs — static `<li>` labels (no dead buttons)
+- [x] News body — `text-body` for excerpts
+- [x] Hero overlay radius — `max-lg:rounded-none`
+- [x] Heading hierarchy — Platforms / Contact `h2.sr-only`
+- [x] Team headshots — 38 individual photos imported; per-member card images working
+- [x] Team bios + department tabs + modal — client component with Escape/overlay/focus-trap/scroll-lock
+- [x] LinkedIn News — Posts API integration (`src/lib/linkedin.ts`, `src/data/news.ts`) with curated fallbacks
+- [x] SvgImg helper for scoped eslint-disable on public SVGs

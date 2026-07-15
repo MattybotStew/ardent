@@ -2,32 +2,35 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="w-full px-[34px]">
-      <div className="relative flex min-h-[768px] items-center overflow-hidden rounded-[20px] py-[120px]">
+    <section className="w-full">
+      <div className="container-site relative flex min-h-192 items-center overflow-hidden rounded-[20px] py-30 max-lg:min-h-[100dvh] max-lg:rounded-none max-lg:py-20">
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero-bg.png"
           alt="City skyline"
           fill
           priority
+          sizes="(max-width: 1200px) 100vw, 1200px"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a2137]/80 via-[#0a2137]/40 to-transparent" />
+        <div
+          className="absolute inset-0 rounded-[20px] max-lg:rounded-none"
+          style={{
+            background:
+              "linear-gradient(34deg, #00315B 28.25%, rgba(0, 104, 193, 0.00) 64.56%)",
+          }}
+        />
 
-        <div className="relative z-10 mx-auto w-full max-w-[1200px] px-6">
-          <div className="max-w-[768px] space-y-12">
-            <h1 className="text-[72px] font-bold leading-[1.05] tracking-[-3px] text-white">
+        <div className="relative z-10 w-full px-16 max-lg:px-6">
+          <div className="max-w-[560px] space-y-10 text-left max-lg:max-w-none">
+            <h1 className="text-hero font-bold tracking-[-0.04em] text-white">
               Pursuing Opportunity.
               <br />
               Investing in Value.
             </h1>
-            <p className="max-w-[600px] rounded-lg bg-[#0a2137]/70 p-6 text-[20px] leading-[1.6] text-white/80">
-              Ardent is a cycle-tested, privately held real estate investment
-              firm focused on identifying and executing differentiated
-              opportunities across debt and equity investments, with a
-              disciplined emphasis on structure. Through a vertically integrated
-              platform of capital, operational capabilities, proprietary deal
-              flow, and rigorous underwriting, Ardent has built a strong track
-              record through multiple market cycles.
+            <p className="text-body-lg text-white/80">
+              A cycle-tested real estate investment firm with a disciplined
+              emphasis on structure, deploying capital across debt and equity
+              investments through multiple market cycles.
             </p>
           </div>
         </div>

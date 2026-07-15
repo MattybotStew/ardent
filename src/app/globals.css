@@ -16,12 +16,126 @@
   --color-ardent-blue-dark: var(--ardent-blue-dark);
   --color-ardent-light: var(--ardent-light);
   --color-charcoal: var(--charcoal);
-  --font-sans: var(--font-pt-sans);
-  --font-display: var(--font-archivo);
+  --font-sans: Verdana, Geneva, sans-serif;
+  /* Section stack gap — used by page.tsx main (gap-30 = 7.5rem) */
+  --spacing-section: 7.5rem; /* 120px desktop */
+  --spacing-section-mobile: 5rem; /* 80px mobile */
+}
+
+/* Smooth scroll for all in-page #anchor links (header + footer nav) */
+html {
+  scroll-behavior: smooth;
+  /* Global sticky-header clearance for #anchors */
+  scroll-padding-top: 6.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/*
+  Offset sticky header when jumping to sections.
+  Header is ~64–80px; leave breathing room so titles/cards aren't clipped.
+  Uses element#id specificity so it wins over Tailwind scroll-mt-* utilities.
+*/
+section[id],
+[id="contact"] {
+  scroll-margin-top: 6.5rem;
+}
+
+@media (max-width: 1023px) {
+  html {
+    scroll-padding-top: 5.75rem;
+  }
+
+  section[id],
+  [id="contact"] {
+    scroll-margin-top: 5.75rem;
+  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-pt-sans), Arial, Helvetica, sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Shared content container — 80% viewport on large screens */
+.container-site {
+  width: 100%;
+  max-width: 80%;
+  margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .container-site {
+    max-width: 100%;
+    padding-inline: 1.5rem; /* 24px — mobile edge inset */
+  }
+}
+
+/*
+  Responsive type scale — Major Third (1.25).
+  Desktop sizes match Figma prototypes.
+  Mobile sizes follow the responsive type scale from AGENTS.md.
+*/
+
+@utility text-hero {
+  font-size: clamp(1.75rem, 5vw, 4.125rem); /* 28px → 66px */
+  line-height: 1.05;
+}
+
+@utility text-heading-1 {
+  font-size: clamp(1.75rem, 3vw, 3rem); /* 28px → 48px */
+  line-height: 1.05;
+}
+
+@utility text-heading-2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem); /* 24px → 36px */
+  line-height: 1.1;
+}
+
+@utility text-heading-3 {
+  font-size: clamp(1.25rem, 1.75vw, 1.375rem); /* 20px → 22px */
+  line-height: 1.2;
+}
+
+@utility text-body {
+  font-size: 1.125rem; /* 18px — fixed at desktop body size */
+  line-height: 1.5;
+}
+
+@utility text-body-lg {
+  font-size: clamp(1.125rem, 1.5vw, 1.25rem); /* 18px → 20px */
+  line-height: 1.6;
+}
+
+@utility text-small {
+  font-size: 0.984375rem; /* 15.75px */
+  line-height: 1.33;
+}
+
+@utility text-caption {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+}
+
+/* Stat display figures — responsive */
+@utility text-stat {
+  font-size: clamp(3rem, 8vw, 6.25rem); /* 48px → 100px */
+  line-height: 1;
+}
+
+@utility text-stat-lg {
+  font-size: clamp(3.5rem, 9vw, 7.375rem); /* 56px → 118px */
+  line-height: 1;
+}
+
+@utility text-stat-accent {
+  font-size: clamp(1.75rem, 5vw, 3.75rem); /* 28px → 60px */
+  line-height: 1;
 }

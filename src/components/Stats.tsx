@@ -1,27 +1,65 @@
 type Stat = {
+  id: string;
   value: React.ReactNode;
   label: React.ReactNode;
+  largeValue?: boolean;
 };
 
-const row1: Stat[] = [
-  { value: <>14<span className="text-[60px] tracking-[-0.6px]">+</span></>, label: "Years IN BUSINESS" },
-  { value: <>355<span className="text-[60px] tracking-[-0.6px]">+</span></>, label: "Transactions" },
-  { value: <>94<span className="text-[60px] tracking-[-0.6px]">%</span></>, label: "Investor Retention" },
-];
-
-const row2: Stat[] = [
+const stats: Stat[] = [
   {
+    id: "years-business",
     value: (
       <>
-        <span className="text-[60px] tracking-[-0.6px]">$</span>6.8B
-        <span className="text-[60px] tracking-[-0.6px]">+</span>
+        14<span className="text-stat-accent tracking-[-0.6px]">+</span>
+      </>
+    ),
+    label: "Years in Business",
+  },
+  {
+    id: "transactions",
+    value: (
+      <>
+        355<span className="text-stat-accent tracking-[-0.6px]">+</span>
+      </>
+    ),
+    label: "Transactions",
+  },
+  {
+    id: "retention",
+    value: (
+      <>
+        94<span className="text-stat-accent tracking-[-0.6px]">%</span>
+      </>
+    ),
+    label: "Investor Retention",
+  },
+  {
+    id: "capital",
+    value: (
+      <>
+        <span className="text-stat-accent tracking-[-0.6px]">$</span>6.8B
+        <span className="text-stat-accent tracking-[-0.6px]">+</span>
       </>
     ),
     label: "Invested Capital",
   },
-  { value: "55+", label: "Team Members" },
   {
-    value: <>17<span className="text-[60px] tracking-[-0.6px]">+</span></>,
+    id: "team",
+    value: (
+      <>
+        55<span className="text-stat-accent tracking-[-0.6px]">+</span>
+      </>
+    ),
+    label: "Team Members",
+    largeValue: true,
+  },
+  {
+    id: "committee",
+    value: (
+      <>
+        17<span className="text-stat-accent tracking-[-0.6px]">+</span>
+      </>
+    ),
     label: (
       <>
         Years Investment
@@ -30,11 +68,13 @@ const row2: Stat[] = [
       </>
     ),
   },
-];
-
-const row3: Stat[] = [
   {
-    value: "20+",
+    id: "leadership",
+    value: (
+      <>
+        20<span className="text-stat-accent tracking-[-0.6px]">+</span>
+      </>
+    ),
     label: (
       <>
         Years Average Senior
@@ -42,51 +82,69 @@ const row3: Stat[] = [
         Leadership Experience
       </>
     ),
+    largeValue: true,
   },
 ];
 
-function StatRow({ stats, centered = false }: { stats: Stat[]; centered?: boolean }) {
+function StatCell({ value, label, largeValue = false }: Omit<Stat, "id">) {
   return (
-    <div
-      className={`flex w-full max-w-[1200px] items-center justify-center gap-2.5 ${centered ? "" : ""}`}
-    >
-      <div className="h-full w-px shrink-0 bg-[rgba(51,51,51,0.2)]" />
-      {stats.map((stat, i) => (
-        <div key={i} className="flex flex-1 flex-col items-center py-10">
-          <div className="text-center text-ardent-blue">
-            <p className="text-[100px] leading-[2] tracking-[-1px]">{stat.value}</p>
-            <p className="text-[18px] uppercase leading-[2] tracking-[-0.9px]">
-              {stat.label}
-            </p>
-          </div>
-        </div>
-      ))}
-      <div className="h-full w-px shrink-0 bg-[rgba(51,51,51,0.2)]" />
+    <div className="flex flex-col items-center justify-center px-[30px] py-10 text-center text-ardent-blue">
+      <p
+        className={`mb-0 font-normal tracking-[-1px] ${
+          largeValue ? "text-stat-lg" : "text-stat"
+        }`}
+      >
+        {value}
+      </p>
+      <p className="text-body uppercase tracking-[-0.9px]">
+        {label}
+      </p>
     </div>
   );
+}
+
+function Divider() {
+  return (
+    <div className="w-px shrink-0 self-stretch bg-[rgba(51,51,51,0.2)] max-lg:h-px max-lg:w-full max-lg:self-auto" />
+  );
+}
+
+function StatRow({ rowStats }: { rowStats: Stat[] }) {
+  const items: React.ReactNode[] = [<Divider key="start" />];
+
+  rowStats.forEach((stat, index) => {
+    if (index > 0) {
+      items.push(<Divider key={`divider-${stat.id}`} />);
+    }
+    items.push(
+      <div key={stat.id} className="min-w-0 flex-1">
+        <StatCell {...stat} />
+      </div>,
+    );
+  });
+
+  items.push(<Divider key="end" />);
+
+  return <div className="flex w-full items-stretch gap-2.5 max-lg:flex-col">{items}</div>;
 }
 
 export default function Stats() {
   return (
     <section id="at-a-glance" className="w-full">
-      <div className="flex flex-col items-center gap-20 px-[100px] py-[120px]">
-        <h2 className="max-w-[830px] text-center text-[48px] font-bold leading-[1.05] text-ardent-blue">
+      <div className="container-site flex flex-col items-center gap-20">
+        <h2 className="text-heading-1 max-w-[830px] text-center font-bold text-ardent-blue">
           Ardent at a Glance
         </h2>
+
         <div className="flex w-full flex-col gap-2.5">
-          <StatRow stats={row1} />
-          <StatRow stats={row2} />
-          <div className="flex w-full max-w-[1200px] items-center justify-center gap-2.5">
-            <div className="h-full w-px shrink-0 bg-[rgba(51,51,51,0.3)]" />
-            <div className="flex w-[378px] flex-col items-center py-10">
-              <div className="text-center text-ardent-blue">
-                <p className="text-[118px] leading-[2]">{row3[0].value}</p>
-                <p className="text-[18px] uppercase leading-[1.2] tracking-[-0.9px]">
-                  {row3[0].label}
-                </p>
-              </div>
+          <StatRow rowStats={stats.slice(0, 3)} />
+          <StatRow rowStats={stats.slice(3, 6)} />
+          <div className="flex items-stretch justify-center gap-2.5 max-lg:w-full max-lg:flex-col">
+            <Divider />
+            <div className="w-[378px] max-lg:w-full">
+              <StatCell {...stats[6]} />
             </div>
-            <div className="h-full w-px shrink-0 bg-[rgba(51,51,51,0.3)]" />
+            <Divider />
           </div>
         </div>
       </div>

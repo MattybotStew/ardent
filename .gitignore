@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# client source materials (not part of the built site)
+/From Client/
+/ardent@0.1.0
+/eslint
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
